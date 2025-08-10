@@ -2,14 +2,25 @@
 .DS_Store
 .idea/
 .vscode/
+.fleet/
 
+# Composer
 composer.lock
 vendor/
+
+# Runtime / caches
 var/
 
+# PHPUnit
 /phpunit.unit.xml
 /phpunit.integration.xml
-
-/phpstan.neon
 /.phpunit.result.cache
+/.phpunit.cache/
+/coverage/
+
+# PHPStan (local override + cache if used)
+/phpstan.neon
+/phpstan.result.cache
+
+# PHP-CS-Fixer
 /.php-cs-fixer.cache
