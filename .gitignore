@@ -9,4 +9,7 @@ var/
 
 /phpunit.unit.xml
 /phpunit.integration.xml
+
+/phpstan.neon
 /.phpunit.result.cache
+/.php-cs-fixer.cache

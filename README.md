@@ -66,11 +66,14 @@ cross-selling.
 
 ### Scripts and tests
 
-| Purpose           | Command              |
-|-------------------|----------------------|
-| Unit tests        | `composer test:unit` |
-| Integration tests | `composer test:int`  |
-| Run all tests     | `composer test`      |
+| Purpose            | Command              |
+|--------------------|----------------------|
+| Unit tests         | `composer test:unit` |
+| Integration tests  | `composer test:int`  |
+| Run all tests      | `composer test`      |
+| Code style — check | `composer cs:check`  |
+| Code style — fix   | `composer cs:fix`    |
+| Static analysis    | `composer phpstan`   |
 
 ## Roadmap
 
