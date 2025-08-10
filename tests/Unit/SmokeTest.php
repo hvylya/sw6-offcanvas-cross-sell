@@ -10,6 +10,6 @@ final class SmokeTest extends TestCase
 {
     public function testPhpunitRuns(): void
     {
-        self::assertTrue(true);
+        $this->assertTrue(true); // @phpstan-ignore-line
     }
 }
