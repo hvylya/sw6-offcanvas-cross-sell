@@ -1,0 +1,36 @@
+{
+  "name": "hvylya/sw6-offcanvas-cross-sell",
+  "description": "Shopware 6 plugin: minimal off-canvas with cross-selling",
+  "type": "shopware-platform-plugin",
+  "version": "1.0.0",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "hvylya"
+    }
+  ],
+  "require": {
+    "shopware/core": "^6.7"
+  },
+  "extra": {
+    "shopware-plugin-class": "Hvylya\\OffCanvasCrossSell\\HvOffCanvasCrossSell",
+    "label": {
+      "en-GB": "Offcanvas Cross-Sell (minimal cart)",
+      "de-DE": "Offcanvas Cross-Selling (Mini-Warenkorb)"
+    },
+    "description": {
+      "en-GB": "Shows a minimal off-canvas after adding to cart: displays only the last added item and a selected cross-selling group. Opening the cart from the header keeps the regular off-canvas.",
+      "de-DE": "Zeigt nach „In den Warenkorb“ ein minimales Off-Canvas: nur der zuletzt hinzugefügte Artikel und eine ausgewählte Cross-Selling-Gruppe. Über das Header-Icon bleibt der normale Warenkorb-Off-Canvas erhalten."
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Hvylya\\OffCanvasCrossSell\\": "src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/runtime": true
+    }
+  }
+}
