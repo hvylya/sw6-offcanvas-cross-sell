@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/TestBootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="KERNEL_CLASS" value="Shopware\Core\Kernel"/>
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_DEBUG" value="0"/>
+        <env name="SHOPWARE_HTTP_CACHE_ENABLED" value="0"/>
+    </php>
+</phpunit>

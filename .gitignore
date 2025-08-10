@@ -6,3 +6,7 @@
 composer.lock
 vendor/
 var/
+
+/phpunit.unit.xml
+/phpunit.integration.xml
+/.phpunit.result.cache

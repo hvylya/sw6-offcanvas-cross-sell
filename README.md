@@ -48,6 +48,13 @@ A minimal, clean Shopware 6 plugin skeleton to introduce an alternative “Add-t
 - Dockware (Shopware local environment):
   https://docs.dockware.io/development/start-developing
 
+## Tests
+Run via Composer:
+
+- **Unit:** `composer test:unit`
+- **Integration:** `composer test:int`
+- **All tests:** `composer test`
+
 ## Roadmap
 - [ ] Decorate the off-canvas route/controller for add-to-cart flow
 - [ ] Minimal off-canvas template (last added item only)
