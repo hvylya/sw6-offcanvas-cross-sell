@@ -1,0 +1,21 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% block component_offcanvas_cart_items %}
+    <ul class="offcanvas-cart-items list-unstyled" data-hv-offcanvas="minimal">
+        {% if lastAdded %}
+            {% sw_include '@Storefront/storefront/component/line-item/line-item.html.twig' with {
+                lineItem: lastAdded,
+                displayMode: 'offcanvas',
+                redirectTo: 'frontend.cart.offcanvas'
+            } %}
+        {% endif %}
+    </ul>
+
+    {# async placeholder for cross-selling (Part 2) #}
+    <div id="hv-cross-sell"
+         class="hv-cross-sell"
+         aria-live="polite"
+         data-product-id="{{ lastAdded.referencedId|default('') }}">
+        <div class="hv-cross-sell__skeleton"></div>
+    </div>
+{% endblock %}
