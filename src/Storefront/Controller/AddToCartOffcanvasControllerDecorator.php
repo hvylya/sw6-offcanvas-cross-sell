@@ -57,6 +57,8 @@ final class AddToCartOffcanvasControllerDecorator extends CartLineItemController
             return $response;
         }
 
+        // TODO(caveat): We inject minimal `page.cart` only to keep core partials working.
+        // Consider basing on `utilities/offcanvas.html.twig` + own view-model to drop this dependency.
         return $this->renderStorefront(
             '@HvOffcanvasCrossSell/storefront/component/checkout/offcanvas-last-item.html.twig',
             [
