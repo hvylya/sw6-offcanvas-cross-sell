@@ -1,8 +1,40 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
     <services>
-        <!-- Intentionally empty for minimal skeleton -->
+        <defaults autowire="true" autoconfigure="true" public="false"/>
+
+        <!-- Concrete services -->
+        <service id="Hv\Offcanvas\Cart\AddToCartIntentExtractor"/>
+        <service id="Hv\Offcanvas\Cart\LastAddedLineItemFinder"/>
+        <service id="Hv\Offcanvas\Offcanvas\MinimalOffcanvasBuilder"/>
+
+        <!-- Interface bindings -->
+        <service id="Hv\Offcanvas\Cart\AddToCartIntentExtractorInterface"
+                 alias="Hv\Offcanvas\Cart\AddToCartIntentExtractor"/>
+        <service id="Hv\Offcanvas\Cart\LastAddedLineItemFinderInterface"
+                 alias="Hv\Offcanvas\Cart\LastAddedLineItemFinder"/>
+        <service id="Hv\Offcanvas\Offcanvas\MinimalOffcanvasBuilderInterface"
+                 alias="Hv\Offcanvas\Offcanvas\MinimalOffcanvasBuilder"/>
+
+        <!-- Decorator -->
+        <!-- decoration-priority="0": default;
+             order with other decorators is not guaranteed.
+             Use -1024 to run last, +1024 to run first. -->
+        <service id="Hv\Offcanvas\Storefront\Controller\AddToCartOffcanvasControllerDecorator"
+                 decorates="Shopware\Storefront\Controller\CartLineItemController"
+                 decoration-priority="0"
+                 public="true">
+            <argument key="$inner"
+                      type="service"
+                      id="Hv\Offcanvas\Storefront\Controller\AddToCartOffcanvasControllerDecorator.inner"/>
+        </service>
+
+        <!-- Core alias needed by CartLineItemController -->
+        <service id="Shopware\Core\Content\Product\SalesChannel\AbstractProductListRoute"
+                 alias="Shopware\Core\Content\Product\SalesChannel\ProductListRoute"/>
     </services>
 </container>
