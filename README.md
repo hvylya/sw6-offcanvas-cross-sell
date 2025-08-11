@@ -1,4 +1,4 @@
-<h1 align="center">HvOffCanvasCrossSell</h1>
+<h1 align="center">HvOffcanvasCrossSell</h1>
 
 <div align="center">
 

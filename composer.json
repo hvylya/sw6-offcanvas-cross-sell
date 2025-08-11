@@ -5,16 +5,14 @@
   "version": "1.0.0",
   "license": "MIT",
   "authors": [
-    {
-      "name": "hvylya"
-    }
+    { "name": "hvylya" }
   ],
   "require": {
     "php": "^8.2",
     "shopware/core": "~6.7.0"
   },
   "extra": {
-    "shopware-plugin-class": "Hvylya\\OffCanvasCrossSell\\HvOffCanvasCrossSell",
+    "shopware-plugin-class": "Hv\\Offcanvas\\HvOffcanvasCrossSell",
     "label": {
       "en-GB": "Offcanvas Cross-Sell (minimal cart)",
       "de-DE": "Offcanvas Cross-Selling (Mini-Warenkorb)"
@@ -26,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Hvylya\\OffCanvasCrossSell\\": "src/"
+      "Hv\\Offcanvas\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Hvylya\\OffCanvasCrossSell\\Tests\\": "tests/"
+      "Hv\\Offcanvas\\Tests\\": "tests/"
     }
   },
   "config": {

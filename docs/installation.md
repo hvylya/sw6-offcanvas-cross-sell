@@ -2,7 +2,7 @@
 
 ## From Release
 
-1. Download `HvOffCanvasCrossSell.zip` from [Releases](https://github.com/hvylya/sw6-offcanvas-cross-sell/releases).
+1. Download `HvOffcanvasCrossSell.zip` from [Releases](https://github.com/hvylya/sw6-offcanvas-cross-sell/releases).
 2. In Shopware Admin: Extensions → My extensions → Upload → select the ZIP.
 3. Activate the plugin.
 
@@ -10,11 +10,11 @@
 
 ```bash
 # Place plugin in:
-custom/plugins/HvOffCanvasCrossSell
+custom/plugins/HvOffcanvasCrossSell
 
 composer install
 
 # Then run:
 bin/console plugin:refresh
-bin/console plugin:install --activate HvOffCanvasCrossSell
+bin/console plugin:install --activate HvOffcanvasCrossSell
 ```

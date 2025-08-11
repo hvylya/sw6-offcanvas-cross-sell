@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hvylya\OffCanvasCrossSell\Tests\Integration;
+namespace Hv\Offcanvas\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Test\TestCaseBase\KernelTestBehaviour;

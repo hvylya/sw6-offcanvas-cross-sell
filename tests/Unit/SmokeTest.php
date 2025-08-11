@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hvylya\OffCanvasCrossSell\Tests\Unit;
+namespace Hv\Offcanvas\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
