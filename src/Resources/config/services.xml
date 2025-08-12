@@ -5,14 +5,43 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <!-- sensible defaults -->
         <defaults autowire="true" autoconfigure="true" public="false"/>
 
-        <!-- Concrete services -->
+        <!-- Cross-sell: providers     -->
+        <service id="Hv\Offcanvas\CrossSell\Group\CrossSellGroupProvider">
+            <argument key="$route"
+                      type="service"
+                      id="Shopware\Core\Content\Product\SalesChannel\CrossSelling\ProductCrossSellingRoute"/>
+        </service>
+        <service id="Hv\Offcanvas\CrossSell\Group\CrossSellGroupProviderInterface"
+                 alias="Hv\Offcanvas\CrossSell\Group\CrossSellGroupProvider"/>
+
+        <service id="Hv\Offcanvas\CrossSell\Product\ProductProvider">
+            <argument type="service" id="product.repository"/>
+        </service>
+        <service id="Hv\Offcanvas\CrossSell\Product\ProductProviderInterface"
+                 alias="Hv\Offcanvas\CrossSell\Product\ProductProvider"/>
+
+        <!-- Cross-sell: selectors, order matters -->
+        <service id="Hv\Offcanvas\CrossSell\Select\ProductCustomFieldPositionSelector"/>
+        <service id="Hv\Offcanvas\CrossSell\Select\GlobalConfigPositionSelector"/>
+
+        <!-- Cross-sell: selection -->
+        <service id="Hv\Offcanvas\CrossSell\Select\CrossSellSelectionService">
+            <argument type="service" id="Hv\Offcanvas\CrossSell\Product\ProductProviderInterface"/>
+            <argument type="service" id="Hv\Offcanvas\CrossSell\Group\CrossSellGroupProviderInterface"/>
+            <argument type="collection">
+                <argument type="service" id="Hv\Offcanvas\CrossSell\Select\ProductCustomFieldPositionSelector"/>
+                <argument type="service" id="Hv\Offcanvas\CrossSell\Select\GlobalConfigPositionSelector"/>
+            </argument>
+        </service>
+
+        <!-- Part 1: minimal offcanvas -->
         <service id="Hv\Offcanvas\Cart\AddToCartIntentExtractor"/>
         <service id="Hv\Offcanvas\Cart\LastAddedLineItemFinder"/>
         <service id="Hv\Offcanvas\Offcanvas\MinimalOffcanvasBuilder"/>
 
-        <!-- Interface bindings -->
         <service id="Hv\Offcanvas\Cart\AddToCartIntentExtractorInterface"
                  alias="Hv\Offcanvas\Cart\AddToCartIntentExtractor"/>
         <service id="Hv\Offcanvas\Cart\LastAddedLineItemFinderInterface"
@@ -31,10 +60,9 @@
             <argument key="$inner"
                       type="service"
                       id="Hv\Offcanvas\Storefront\Controller\AddToCartOffcanvasControllerDecorator.inner"/>
+            <argument key="$productListRoute"
+                      type="service"
+                      id="Shopware\Core\Content\Product\SalesChannel\ProductListRoute"/>
         </service>
-
-        <!-- Core alias needed by CartLineItemController -->
-        <service id="Shopware\Core\Content\Product\SalesChannel\AbstractProductListRoute"
-                 alias="Shopware\Core\Content\Product\SalesChannel\ProductListRoute"/>
     </services>
 </container>
