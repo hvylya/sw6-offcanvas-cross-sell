@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+<card>
+        <title>Offcanvas Cross-Sell</title>
+        <title lang="de-DE">Offcanvas Cross-Selling</title>
+
+        <input-field type="int">
+            <name>crossSellGroupPosition</name>
+
+            <label>Global cross-sell group position</label>
+            <label lang="de-DE">Globale Cross-Selling-Gruppenposition</label>
+
+            <helpText>
+                Which cross-sell group to show in the minimal off-canvas when a product
+                doesn’t set its own. Leave empty to use the first group. 1 = first, 2 = second, …
+            </helpText>
+            <helpText lang="de-DE">
+                Welche Cross-Selling-Gruppe im minimalen Off-Canvas angezeigt wird,
+                wenn ein Produkt keine eigene Position hat. Leer lassen = erste Gruppe.
+                1 = erste, 2 = zweite, …
+            </helpText>
+
+            <placeholder>e.g. 2</placeholder>
+            <placeholder lang="de-DE">z. B. 2</placeholder>
+
+            <min>0</min>
+            <step>1</step>
+        </input-field>
+    </card>
+</config>
