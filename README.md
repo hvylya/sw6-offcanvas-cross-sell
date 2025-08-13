@@ -46,7 +46,6 @@ See the full sequence diagram in [docs/flow.md](docs/flow.md).
 - [Flow](docs/flow.md)
 - [Installation](docs/installation.md)
 - [Development](docs/development.md)
-- [Caveats](docs/caveats.md)
 - [TODO](docs/todo.md)
 - [Roadmap](docs/roadmap.md)
 
