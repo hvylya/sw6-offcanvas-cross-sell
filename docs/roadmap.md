@@ -6,4 +6,4 @@
 - [x] Implement product custom field for cross-selling group index
 - [x] Implement plugin configuration for default index
 - [x] Implement cross-selling selection logic
-- [ ] Render cross-selling compact product list in minimal off-canvas
+- [x] Render cross-selling compact product list in minimal off-canvas

@@ -11,11 +11,14 @@
         {% endif %}
     </ul>
 
-    {# async placeholder for cross-selling (Part 2) #}
-    <div id="hv-cross-sell"
-         class="hv-cross-sell"
+    {# async placeholder for cross-selling (loaded by HvOffcanvasCrossSell JS) #}
+    <div class="hv-cross-sell"
+         role="region"
          aria-live="polite"
-         data-product-id="{{ lastAdded.referencedId|default('') }}">
+         aria-label="{{ 'hv-offcanvas.checkout.offcanvasCrossSellHeader'|trans }}"
+         data-hv-offcanvas-cross-sell
+         data-timeout="5000"
+         data-url="{{ path('frontend.hv.offcanvas.cross_sell', { productId: lastAdded.referencedId|default('') }) }}">
         <div class="hv-cross-sell__skeleton"></div>
     </div>
 {% endblock %}

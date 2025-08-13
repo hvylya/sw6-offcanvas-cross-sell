@@ -1,1 +1,63 @@
-{# async content for cross-selling #}
+{% set items = products ?? [] %}
+
+{% if items|length %}
+    <div class="summary-label fw-bold mb-md-2">
+        {{ 'hv-offcanvas.checkout.offcanvasCrossSellHeader'|trans }}
+    </div>
+
+    <ul class="list-unstyled m-0">
+        {% for product in items %}
+            <li class="offcanvas-cart-item py-3 border-bottom">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        {% set media = product.cover.media ?? null %}
+                        {% if media %}
+                            {% set thumb = media.thumbnails|first %}
+                            <a class="offcanvas-cart-item-img d-inline-block"
+                               href="{{ seoUrl('frontend.detail.page', { productId: product.id }) }}">
+                                <img class="img-fluid rounded"
+                                     loading="lazy"
+                                     width="56" height="56"
+                                     src="{{ (thumb ? thumb.url : media.url)|raw }}"
+                                     alt="{{ product.translated.name|striptags }}">
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="col">
+                        <a class="offcanvas-cart-item-name d-block text-truncate mb-1"
+                           href="{{ seoUrl('frontend.detail.page', { productId: product.id }) }}">
+                            {{ product.translated.name }}
+                        </a>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="offcanvas-cart-item-price mb-0">
+                                <strong>{{ product.calculatedPrice.unitPrice|currency }}</strong>
+                            </div>
+
+                            <form action="{{ path('frontend.checkout.line-item.add') }}"
+                                  method="post"
+                                  class="m-0 ms-2 d-inline-block flex-shrink-0"
+                                  data-add-to-cart="true">
+                                <input type="hidden" name="redirectTo" value="frontend.cart.offcanvas">
+                                <input type="hidden" name="lineItems[{{ product.id }}][id]" value="{{ product.id }}">
+                                <input type="hidden" name="lineItems[{{ product.id }}][type]" value="product">
+                                <input type="hidden" name="lineItems[{{ product.id }}][referencedId]" value="{{ product.id }}">
+                                <input type="hidden" name="lineItems[{{ product.id }}][stackable]" value="1">
+                                <input type="hidden" name="lineItems[{{ product.id }}][removable]" value="1">
+                                <input type="hidden" name="lineItems[{{ product.id }}][quantity]" value="{{ product.minPurchase ?? 1 }}">
+
+                                <button type="submit"
+                                        class="btn btn-primary btn-sm py-1 px-2 text-nowrap">
+                                    {{ 'detail.addProduct'|trans|sw_sanitize }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="hv-cross-sell__empty"></div>
+{% endif %}
