@@ -2,7 +2,7 @@
 
 {% if items|length %}
     <div class="summary-label fw-bold mb-md-2">
-        {{ 'hv-offcanvas.checkout.offcanvasCrossSellHeader'|trans }}
+        {{ 'hv-offcanvas.checkout.offcanvasCrossSellHeader'|trans|sw_sanitize }}
     </div>
 
     <ul class="list-unstyled m-0">
@@ -10,24 +10,27 @@
             <li class="offcanvas-cart-item py-3 border-bottom">
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
-                        {% set media = product.cover.media ?? null %}
-                        {% if media %}
-                            {% set thumb = media.thumbnails|first %}
-                            <a class="offcanvas-cart-item-img d-inline-block"
-                               href="{{ seoUrl('frontend.detail.page', { productId: product.id }) }}">
-                                <img class="img-fluid rounded"
-                                     loading="lazy"
-                                     width="56" height="56"
-                                     src="{{ (thumb ? thumb.url : media.url)|raw }}"
-                                     alt="{{ product.translated.name|striptags }}">
-                            </a>
+                        {% set cover = product.cover %}
+                        {% if cover and cover.media %}
+                            {% sw_thumbnails 'hv-cross-sell-thumb-' ~ product.id with {
+                                media: cover.media,
+                                sizes: {
+                                    'xs': '56px'
+                                },
+                                attributes: {
+                                    class: 'img-fluid rounded',
+                                    loading: 'lazy',
+                                    width: 56, height: 56,
+                                    alt: product.translated.name|striptags|e('html_attr')
+                                }
+                            } %}
                         {% endif %}
                     </div>
 
                     <div class="col">
                         <a class="offcanvas-cart-item-name d-block text-truncate mb-1"
                            href="{{ seoUrl('frontend.detail.page', { productId: product.id }) }}">
-                            {{ product.translated.name }}
+                            {{ product.translated.name|sw_sanitize }}
                         </a>
 
                         <div class="d-flex justify-content-between align-items-center">
@@ -35,6 +38,7 @@
                                 <strong>{{ product.calculatedPrice.unitPrice|currency }}</strong>
                             </div>
 
+                            {# CSRF tokens are deprecated in Storefront (see ADR) #}
                             <form action="{{ path('frontend.checkout.line-item.add') }}"
                                   method="post"
                                   class="m-0 ms-2 d-inline-block flex-shrink-0"

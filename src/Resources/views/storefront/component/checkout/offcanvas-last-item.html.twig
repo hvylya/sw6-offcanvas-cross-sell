@@ -15,7 +15,7 @@
     <div class="hv-cross-sell"
          role="region"
          aria-live="polite"
-         aria-label="{{ 'hv-offcanvas.checkout.offcanvasCrossSellHeader'|trans }}"
+         aria-label="{{ 'hv-offcanvas.checkout.offcanvasCrossSellHeader'|trans|striptags|e('html_attr') }}"
          data-hv-offcanvas-cross-sell
          data-timeout="5000"
          data-url="{{ path('frontend.hv.offcanvas.cross_sell', { productId: lastAdded.referencedId|default('') }) }}">
