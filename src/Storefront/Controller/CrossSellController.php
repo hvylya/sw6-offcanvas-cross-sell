@@ -20,8 +20,6 @@ final class CrossSellController extends StorefrontController
         private readonly CrossSellSelectionService $selection,
     ) {}
 
-    // NOTE: Personalized XHR fragment. Confirm infra/CDN doesn’t cache it.
-    // If needed, add a Response subscriber to set `no-store` for this route.
     #[Route(
         path: '/hv/offcanvas/cross-sell/{productId}',
         name: 'frontend.hv.offcanvas.cross_sell',
