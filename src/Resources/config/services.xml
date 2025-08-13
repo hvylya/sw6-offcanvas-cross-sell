@@ -23,18 +23,20 @@
         <service id="Hv\Offcanvas\CrossSell\Product\ProductProviderInterface"
                  alias="Hv\Offcanvas\CrossSell\Product\ProductProvider"/>
 
-        <!-- Cross-sell: selectors, order matters -->
-        <service id="Hv\Offcanvas\CrossSell\Select\ProductCustomFieldPositionSelector"/>
-        <service id="Hv\Offcanvas\CrossSell\Select\GlobalConfigPositionSelector"/>
+        <!-- Cross-sell: selectors (tagged with priority) -->
+        <service id="Hv\Offcanvas\CrossSell\Select\ProductCustomFieldPositionSelector">
+            <tag name="hv.offcanvas.position_selector" priority="200"/>
+        </service>
 
-        <!-- Cross-sell: selection -->
-        <service id="Hv\Offcanvas\CrossSell\Select\CrossSellSelectionService">
+        <service id="Hv\Offcanvas\CrossSell\Select\GlobalConfigPositionSelector">
+            <tag name="hv.offcanvas.position_selector" priority="100"/>
+        </service>
+
+        <!-- Selection (lazy) -->
+        <service id="Hv\Offcanvas\CrossSell\Select\CrossSellSelectionService" lazy="true">
             <argument type="service" id="Hv\Offcanvas\CrossSell\Product\ProductProviderInterface"/>
             <argument type="service" id="Hv\Offcanvas\CrossSell\Group\CrossSellGroupProviderInterface"/>
-            <argument type="collection">
-                <argument type="service" id="Hv\Offcanvas\CrossSell\Select\ProductCustomFieldPositionSelector"/>
-                <argument type="service" id="Hv\Offcanvas\CrossSell\Select\GlobalConfigPositionSelector"/>
-            </argument>
+            <argument type="tagged_iterator" tag="hv.offcanvas.position_selector"/>
         </service>
 
         <!-- Part 1: minimal offcanvas -->
@@ -49,13 +51,12 @@
         <service id="Hv\Offcanvas\Offcanvas\MinimalOffcanvasBuilderInterface"
                  alias="Hv\Offcanvas\Offcanvas\MinimalOffcanvasBuilder"/>
 
-        <!-- Decorator -->
-        <!-- decoration-priority="0": default;
+        <!-- Decorator with default decoration-priority="0"
              order with other decorators is not guaranteed.
              Use -1024 to run last, +1024 to run first. -->
         <service id="Hv\Offcanvas\Storefront\Controller\AddToCartOffcanvasControllerDecorator"
                  decorates="Shopware\Storefront\Controller\CartLineItemController"
-                 decoration-priority="0"
+                 decoration-priority="-1024"
                  public="true">
             <argument key="$inner"
                       type="service"
