@@ -32,8 +32,8 @@
             <tag name="hv.offcanvas.position_selector" priority="100"/>
         </service>
 
-        <!-- Selection (lazy) -->
-        <service id="Hv\Offcanvas\CrossSell\Select\CrossSellSelectionService" lazy="true">
+        <!-- Selection -->
+        <service id="Hv\Offcanvas\CrossSell\Select\CrossSellSelectionService">
             <argument type="service" id="Hv\Offcanvas\CrossSell\Product\ProductProviderInterface"/>
             <argument type="service" id="Hv\Offcanvas\CrossSell\Group\CrossSellGroupProviderInterface"/>
             <argument type="tagged_iterator" tag="hv.offcanvas.position_selector"/>
@@ -65,5 +65,8 @@
                       type="service"
                       id="Shopware\Core\Content\Product\SalesChannel\ProductListRoute"/>
         </service>
+
+        <!-- Controller -->
+        <service id="Hv\Offcanvas\Storefront\Controller\CrossSellController" public="true"/>
     </services>
 </container>
