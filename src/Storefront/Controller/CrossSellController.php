@@ -26,6 +26,7 @@ final class CrossSellController extends StorefrontController
         path: '/hv/offcanvas/cross-sell/{productId}',
         name: 'frontend.hv.offcanvas.cross_sell',
         requirements: ['productId' => '[0-9A-Fa-f]{32}'],
+        defaults: ['XmlHttpRequest' => true],
         methods: ['GET'],
     )]
     public function load(string $productId, Request $request, SalesChannelContext $context): Response
