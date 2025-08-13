@@ -22,12 +22,20 @@ final readonly class CrossSellLookup
         $firstNonEmpty = null;
 
         foreach ($elements as $element) {
+            // NOTE: If core guarantees non-empty products,
+            // this check is redundant and can be removed
+            if ($element->getProducts()->count() === 0) {
+                continue;
+            }
+
+            if ($firstNonEmpty === null) {
+                $firstNonEmpty = $element;
+            }
+
             $pos = $element->getCrossSelling()->getPosition();
+
             if ($pos > 0 && !isset($byPosition[$pos])) {
                 $byPosition[$pos] = $element;
-            }
-            if ($firstNonEmpty === null && $element->getProducts()->count() > 0) {
-                $firstNonEmpty = $element;
             }
         }
 
@@ -36,8 +44,7 @@ final readonly class CrossSellLookup
 
     public function getByPosition(int $position): ?CrossSellingElement
     {
-        $element = $this->byPosition[$position] ?? null;
-        return ($element && $element->getProducts()->count() > 0) ? $element : null;
+        return $this->byPosition[$position] ?? null;
     }
 
     public function getFirstNonEmpty(): ?CrossSellingElement
