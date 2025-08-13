@@ -5,12 +5,14 @@
                                          |
                                          |---(Decides off-canvas type: minimal or standard)
                                          |---(Gets last added cart item)
-                                         |---(Resolves cross-selling group)
+                                         |---(Render off-canvas with cross-sell placeholder)
                                                |
-                                               |---(Reads product custom field)
-                                               |---(Reads plugin config)
-                                               |---(Fallback: first group or none)
-                                               |
-                                         |---(Renders minimal off-canvas template)
-                                         |---(Twig: translations, minimal markup, accessibility)
+                                               |---[Storefront JS] -> call AJAX route with productId
+                                               v
+                                            [Server Controller]
+                                               |---(Use SelectionService: custom field → config → fallback)
+                                               |---(Render tiny partial or return 204)
+                                               v
+                                            [Storefront JS]
+                                               |---(Replace placeholder or remove it)
 ```
